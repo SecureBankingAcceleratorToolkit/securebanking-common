@@ -17,90 +17,106 @@
 
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.forgerock.securebanking</groupId>
-  <artifactId>securebanking-common-bom</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>securebanking-common-bom</name>
+    <groupId>com.forgerock.securebanking</groupId>
+    <artifactId>securebanking-common-bom</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>securebanking-common-bom</name>
 
-  <description>A project that may be used in a dependencyMangement section to include all dependencies
-    from the securebanking-commons project. Include in dependencyManagement with type pom and scope import.
-  </description>
+    <description>A project that may be used in a dependencyMangement section to include all dependencies
+        from the securebanking-commons project. Include in dependencyManagement with type pom and scope import.
+    </description>
 
-  <url>https://securebankingacceleratortoolkit.github.io/</url>
+    <url>https://securebankingacceleratortoolkit.github.io/</url>
 
-  <organization>
-    <name>ForgeRock</name>
-    <url>http://www.forgerock.org</url>
-  </organization>
-  <inceptionYear>2020</inceptionYear>
+    <organization>
+        <name>ForgeRock</name>
+        <url>http://www.forgerock.org</url>
+    </organization>
+    <inceptionYear>2020</inceptionYear>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <securebanking-common-error.version>1.0.0-SNAPSHOT</securebanking-common-error.version>
-    <openbanking-uk-datamodel.version>1.0.0-SNAPSHOT</openbanking-uk-datamodel.version>
+        <securebanking-common-error.version>1.0.0-SNAPSHOT</securebanking-common-error.version>
+        <openbanking-uk-datamodel.version>1.0.0-SNAPSHOT</openbanking-uk-datamodel.version>
 
-    <mycila-license-maven-plugin.version>4.0.rc1</mycila-license-maven-plugin.version>
-  </properties>
+        <mycila-license-maven-plugin.version>4.0.rc1</mycila-license-maven-plugin.version>
+    </properties>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>com.forgerock.securebanking</groupId>
-        <artifactId>securebanking-common-error</artifactId>
-        <version>${securebanking-common-error.version}</version>
-      </dependency>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.forgerock.securebanking</groupId>
+                <artifactId>securebanking-common-error</artifactId>
+                <version>${securebanking-common-error.version}</version>
+            </dependency>
 
-      <dependency>
-        <groupId>com.forgerock.securebanking</groupId>
-        <artifactId>securebanking-common-openbanking-uk-datamodel</artifactId>
-        <version>${openbanking-uk-datamodel.version}</version>
-      </dependency>
+            <dependency>
+                <groupId>com.forgerock.securebanking</groupId>
+                <artifactId>securebanking-common-openbanking-uk-datamodel</artifactId>
+                <version>${openbanking-uk-datamodel.version}</version>
+            </dependency>
 
-    </dependencies>
-  </dependencyManagement>
+        </dependencies>
+    </dependencyManagement>
 
-  <build>
-    <plugins>
-      <!-- Licence checker defined here as bom does not inherit from parent pom -->
-      <plugin>
-        <groupId>com.mycila</groupId>
-        <artifactId>license-maven-plugin</artifactId>
-        <version>${mycila-license-maven-plugin.version}</version>
-        <configuration>
-          <licenseSets>
-            <licenseSet>
-              <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
-              <excludes>
-                <exclude>**/README</exclude>
-                <exclude>src/test/resources/**</exclude>
-                <exclude>src/main/resources/**</exclude>
-              </excludes>
-            </licenseSet>
-          </licenseSets>
-          <properties>
-            <owner>ForgeRock AS</owner>
-            <email>obst@forgerock.com</email>
-          </properties>
-          <mapping>
-            <java>JAVADOC_STYLE</java>
-          </mapping>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>process-sources</phase>
-            <goals>
-              <goal>format</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+    <build>
+        <plugins>
+            <!-- Licence checker defined here as bom does not inherit from parent pom -->
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>${mycila-license-maven-plugin.version}</version>
+                <configuration>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                            <excludes>
+                                <exclude>**/README</exclude>
+                                <exclude>src/test/resources/**</exclude>
+                                <exclude>src/main/resources/**</exclude>
+                            </excludes>
+                        </licenseSet>
+                    </licenseSets>
+                    <properties>
+                        <owner>ForgeRock AS</owner>
+                        <email>obst@forgerock.com</email>
+                    </properties>
+                    <mapping>
+                        <java>JAVADOC_STYLE</java>
+                    </mapping>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+
+        <repository>
+            <id>maven.forgerock.org-community</id>
+            <name>maven.forgerock.org-releases</name>
+            <url>https://maven.forgerock.org:443/repo/community</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>maven.forgerock.org-community-snapshots</id>
+            <name>maven.forgerock.org-snapshots</name>
+            <url>https://maven.forgerock.org:443/repo/community</url>
+        </snapshotRepository>
+
+    </distributionManagement>
 
 </project>
