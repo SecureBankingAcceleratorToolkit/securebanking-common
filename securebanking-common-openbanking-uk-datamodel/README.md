@@ -28,33 +28,6 @@ In your pom file you should use the `securebanking-common-bom` import (see the R
 
 ```
 
-## Class generation
-Many of the classes are generated from OB Swagger documentation. When a new version of OB API is released, 
-the following steps are performed:
-1. Download the Swagger json files from OB Spec pages (e.g. for 3.1.1 accounts: https://openbanking.atlassian.net/wiki/spaces/DZ/pages/999622968/Account+and+Transaction+API+Specification+-+v3.1.1#AccountandTransactionAPISpecification-v3.1.1-SwaggerSpecification)
->Note: there are currently swagger files for Accounts, Payments, Funds Confirmation, ASPSP Callback and TPP Events - more may be available in future releases).
-1. Download `swagger-codegen-cli-2.4.5.jar`
-1. Run ```
-java -jar swagger-codegen-cli-2.4.5.jar generate \
-    -i {your_json_file} \
-    -DuseBeanValidation=true \
-    -Dmodels \
-    --model-package uk.org.openbanking.datamodel \
-    --group-id com.forgerock.openbanking \
-    --artifact-id openbanking-sdk \
-    -l java \
-    --library resttemplate \
-    -o generated```
- 1. Check the generated files and copy them into appropriate source directory. Do not overwrite existing files.
- 1. Remove Links, Meta, OBError1 and OBErrorResponse1 - we use shared generic versions of these classes.
- 1. Repeat generation for each new swagger json file
- 1. If using Intelij, run format and optimise imports on newly generated files. 
- 1. Increment the major or minor version in pom.xml
- 1. Run build to ensure everything compiles and copyrights are generated for new source files.
- 1. Commit and raise PR.  
-
-
-
 ### How to Build
 
 This is a Java Maven project. 
@@ -72,6 +45,28 @@ git checkout git@github.com:SecureBankingAcceleratorToolkit/securebanking-common
 cd securebanking-common/securebanking-common-openbanking-uk-datamodel
 mvn clean install
 ```
+
+## Class generation
+Many of the classes are generated from the OB Swagger documentation. The project is set-up to make it easy to generate
+the  OB model classes and skeleton API classes using Maven. For efficiency, the default maven profile does not generate
+the code, but it is easy to do so using `code-gen` profile (see below).
+
+The configuration for the swagger generation is currently within `securebanking-openbanking-aspsp-mock/pom.xml` 
+and the swagger specification is within `securebanking-openbanking-aspsp-mock/src/main/resources/specification`.
+
+When a new version of OB API is released, the following steps should be performed:
+ 1. Download the Swagger json files from OB Spec pages (https://github.com/OpenBankingUK/read-write-api-specs)
+    > Note: there are currently swagger files for Accounts, Payments, Funds Confirmation, Callback and TPP Events
+ 1. Run ```mvn clean install -Pcode-gen```
+    > This will generate classes into `securebanking-openbanking-aspsp-mock/target/generated-sources/swagger`
+ 1. Check the generated files and copy them into the appropriate source folder (e.g. `src/main/java`), but **DO NOT**
+ overwrite existing classes.
+ 1. Remove Links, Meta, OBError1 and OBErrorResponse1 - we use shared generic versions of these classes.
+ 1. Uncomment the relevant `<inputSpec>` listing within the `openapi-generator-maven-plugin` in the pom for the next
+ swagger spec (and repeat for each new swagger json file).
+ 1. If using Intellij, run format and optimise imports on newly generated files.
+ 1. Run build to ensure everything compiles and copyrights are generated for new source files.
+ 1. Commit and raise PR.
 
 ## Contributing
 

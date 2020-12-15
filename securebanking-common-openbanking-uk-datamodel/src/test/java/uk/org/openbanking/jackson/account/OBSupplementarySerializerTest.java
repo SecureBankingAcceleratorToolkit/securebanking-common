@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 package uk.org.openbanking.jackson.account;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import uk.org.openbanking.datamodel.payment.OBSupplementaryData1;
 
 import java.io.IOException;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Unit test for {@link uk.org.openbanking.jackson.account.OBSupplementaryData1Serializer}.
+ */
 public class OBSupplementarySerializerTest {
 
     private ObjectMapper mapper = new ObjectMapper();
@@ -38,7 +41,7 @@ public class OBSupplementarySerializerTest {
         String resultValue = mapper.writeValueAsString(obSupplementaryData1);
 
         //Then
-        assertThat(expectedValue, is(resultValue));
+        assertThat(expectedValue).isEqualTo(resultValue);
 
     }
 }
