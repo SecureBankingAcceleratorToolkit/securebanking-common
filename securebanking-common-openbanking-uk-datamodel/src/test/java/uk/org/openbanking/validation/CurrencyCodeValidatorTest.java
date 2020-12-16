@@ -14,29 +14,32 @@
  * limitations under the License.
  */
 package uk.org.openbanking.validation;
-import org.junit.Test;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+/**
+ * Unit test for {@link CurrencyCodeValidator}.
+ */
 public class CurrencyCodeValidatorTest {
 
     private final CurrencyCodeValidator currencyCodeValidator = new CurrencyCodeValidator();
 
     @Test
     public void isValid() {
-        assertThat(currencyCodeValidator.isValid("GBP", null), is(true));
-        assertThat(currencyCodeValidator.isValid("EUR", null), is(true));
-        assertThat(currencyCodeValidator.isValid("USD", null), is(true));
-        assertThat(currencyCodeValidator.isValid("TRY", null), is(true));
-        assertThat(currencyCodeValidator.isValid("XTS", null), is(true));
+        assertThat(currencyCodeValidator.isValid("GBP", null)).isTrue();
+        assertThat(currencyCodeValidator.isValid("EUR", null)).isTrue();
+        assertThat(currencyCodeValidator.isValid("USD", null)).isTrue();
+        assertThat(currencyCodeValidator.isValid("TRY", null)).isTrue();
+        assertThat(currencyCodeValidator.isValid("XTS", null)).isTrue();
 
-        assertThat(currencyCodeValidator.isValid("", null), is(false));
-        assertThat(currencyCodeValidator.isValid(null, null), is(false));
-        assertThat(currencyCodeValidator.isValid("A", null), is(false));
-        assertThat(currencyCodeValidator.isValid("AB", null), is(false));
-        assertThat(currencyCodeValidator.isValid("NCC", null), is(false));
-        assertThat(currencyCodeValidator.isValid("ABCD", null), is(false));
-        assertThat(currencyCodeValidator.isValid("1234", null), is(false));
+        assertThat(currencyCodeValidator.isValid("", null)).isFalse();
+        assertThat(currencyCodeValidator.isValid(null, null)).isFalse();
+        assertThat(currencyCodeValidator.isValid("A", null)).isFalse();
+        assertThat(currencyCodeValidator.isValid("AB", null)).isFalse();
+        assertThat(currencyCodeValidator.isValid("NCC", null)).isFalse();
+        assertThat(currencyCodeValidator.isValid("ABCD", null)).isFalse();
+        assertThat(currencyCodeValidator.isValid("1234", null)).isFalse();
     }
 }

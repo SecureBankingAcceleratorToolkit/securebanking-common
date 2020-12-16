@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 package uk.org.openbanking.jackson.payment;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
-import org.junit.Before;
-import org.junit.Test;
-import uk.org.openbanking.datamodel.account.OBRisk2;
+import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import uk.org.openbanking.datamodel.payment.OBRisk1;
 
 import javax.validation.ConstraintViolation;
@@ -29,15 +29,18 @@ import javax.validation.ValidatorFactory;
 import java.io.IOException;
 import java.util.Set;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowableOfType;
 
+/**
+ * Unit test for {@link OBRisk1} validation.
+ */
 public class OBRiskTest {
 
     private ObjectMapper mapper = new ObjectMapper();
     private Validator validator;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -46,7 +49,6 @@ public class OBRiskTest {
 
     @Test
     public void serialize() throws IOException {
-
         //Given
         String expectedValue = "{" +
                 "\"PaymentContextCode\":\"EcommerceGoods\"," +
@@ -71,16 +73,15 @@ public class OBRiskTest {
         //When
         OBRisk1 obRisk1 = mapper.readValue(expectedValue, OBRisk1.class);
         Set<ConstraintViolation<OBRisk1>> violations = validator.validate(obRisk1);
-        assertTrue(violations.isEmpty());
+        assertThat(violations.isEmpty()).isTrue();
         String resultValue = mapper.writeValueAsString(obRisk1);
 
         //Then
-        assertThat(expectedValue, is(resultValue));
+        assertThat(expectedValue).isEqualTo(resultValue);
     }
 
     @Test
     public void paymentContextCodeNotSpecified() throws IOException {
-
         //Given
         String expectedValue = "{" +
                 "\"MerchantCategoryCode\":\"5967\"," +
@@ -104,16 +105,15 @@ public class OBRiskTest {
         //When
         OBRisk1 obRisk1 = mapper.readValue(expectedValue, OBRisk1.class);
         Set<ConstraintViolation<OBRisk1>> violations = validator.validate(obRisk1);
-        assertTrue(violations.isEmpty());
+        assertThat(violations.isEmpty()).isTrue();
         String resultValue = mapper.writeValueAsString(obRisk1);
 
         //Then
-        assertThat(expectedValue, is(resultValue));
+        assertThat(expectedValue).isEqualTo(resultValue);
     }
 
-    @Test(expected = InvalidDefinitionException.class)
-    public void testInvalidPaymentContext() throws IOException {
-
+    @Test
+    public void testInvalidPaymentContext() {
         //Given
         String expectedValue = "{" +
                 "\"PaymentContextCode\":\"wrongValue\"," +
@@ -136,9 +136,11 @@ public class OBRiskTest {
                 "}";
 
         //When
-        mapper.readValue(expectedValue, OBRisk1.class);
+        ValueInstantiationException exception = catchThrowableOfType(() -> mapper.readValue(expectedValue, OBRisk1.class),
+                ValueInstantiationException.class);
 
-        //Then
-        //exception should be throw
+        // Then
+        assertThat(exception.getMessage().contains("Cannot construct instance of " +
+                "`uk.org.openbanking.datamodel.payment.OBExternalPaymentContext1Code`")).isTrue();
     }
 }
