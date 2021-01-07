@@ -32,14 +32,35 @@
     <name>securebanking-common-error</name>
     <url>https://securebankingacceleratortoolkit.github.io/</url>
 
+    <properties>
+        <openbanking-uk-datamodel.version>1.0.0-SNAPSHOT</openbanking-uk-datamodel.version>
+    </properties>
+
     <dependencies>
+
+        <!-- ForgeRock dependencies -->
+        <dependency>
+            <groupId>com.forgerock.securebanking</groupId>
+            <artifactId>securebanking-common-openbanking-uk-datamodel</artifactId>
+            <version>${openbanking-uk-datamodel.version}</version>
+        </dependency>
+
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
+        <!-- Test dependencies -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
