@@ -27,13 +27,13 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>securebanking-common-error</artifactId>
+    <artifactId>securebanking-common-openbanking-uk-error</artifactId>
 
-    <name>securebanking-common-error</name>
+    <name>securebanking-common-openbanking-uk-error</name>
     <url>https://securebankingacceleratortoolkit.github.io/</url>
 
     <properties>
-        <openbanking-uk-datamodel.version>1.0.0-SNAPSHOT</openbanking-uk-datamodel.version>
+        <securebanking-uk-datamodel.version>1.0.0-SNAPSHOT</securebanking-uk-datamodel.version>
     </properties>
 
     <dependencies>
@@ -42,7 +42,7 @@
         <dependency>
             <groupId>com.forgerock.securebanking</groupId>
             <artifactId>securebanking-common-openbanking-uk-datamodel</artifactId>
-            <version>${openbanking-uk-datamodel.version}</version>
+            <version>${securebanking-uk-datamodel.version}</version>
         </dependency>
 
         <!-- Spring -->

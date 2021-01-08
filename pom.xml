@@ -43,9 +43,10 @@
     </scm>
 
     <modules>
-        <module>securebanking-common-error</module>
         <module>securebanking-common-bom</module>
         <module>securebanking-common-openbanking-uk-datamodel</module>
+        <module>securebanking-common-openbanking-uk-error</module>
+        <module>securebanking-common-openbanking-uk-domain</module>
     </modules>
 
     <repositories>
