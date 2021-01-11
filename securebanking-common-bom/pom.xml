@@ -42,8 +42,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <securebanking-common-error.version>1.0.0-SNAPSHOT</securebanking-common-error.version>
-        <openbanking-uk-datamodel.version>1.0.0-SNAPSHOT</openbanking-uk-datamodel.version>
+        <securebanking-uk-datamodel.version>1.0.0-SNAPSHOT</securebanking-uk-datamodel.version>
+        <securebanking-uk-domain.version>1.0.0-SNAPSHOT</securebanking-uk-domain.version>
+        <securebanking-uk-error.version>1.0.0-SNAPSHOT</securebanking-uk-error.version>
 
         <mycila-license-maven-plugin.version>4.0.rc1</mycila-license-maven-plugin.version>
     </properties>
@@ -52,21 +53,25 @@
         <dependencies>
             <dependency>
                 <groupId>com.forgerock.securebanking</groupId>
-                <artifactId>securebanking-common-error</artifactId>
-                <version>${securebanking-common-error.version}</version>
+                <artifactId>securebanking-common-openbanking-uk-datamodel</artifactId>
+                <version>${securebanking-uk-datamodel.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.forgerock.securebanking</groupId>
-                <artifactId>securebanking-common-openbanking-uk-datamodel</artifactId>
-                <version>${openbanking-uk-datamodel.version}</version>
+                <artifactId>securebanking-common-openbanking-uk-error</artifactId>
+                <version>${securebanking-uk-error.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.forgerock.securebanking</groupId>
+                <artifactId>securebanking-common-openbanking-uk-domain</artifactId>
+                <version>${securebanking-uk-domain.version}</version>
             </dependency>
 
             <!-- Test dependencies -->
             <dependency>
                 <groupId>com.forgerock.securebanking</groupId>
                 <artifactId>securebanking-common-openbanking-uk-datamodel</artifactId>
-                <version>${openbanking-uk-datamodel.version}</version>
+                <version>${securebanking-uk-datamodel.version}</version>
                 <type>test-jar</type>
                 <scope>test</scope>
             </dependency>
